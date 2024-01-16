@@ -12,5 +12,9 @@ def subnet_creation(RG_NAME,VNET_NAME,SUBNET_NAME,network_client):
         print(subnet_id)
         print(f"subnet created succesfully: {subnet_result.name} ")
     except HttpResponseError as error:
-        print ({error})
+        if "InUseSubnetCannotBeDeleted" in error.message:
+            print("resource already exist")
+        else:
+            print(error.message)
+            raise  
     return None

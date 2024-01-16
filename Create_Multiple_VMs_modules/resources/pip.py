@@ -16,4 +16,4 @@ def pip_creation(RG_NAME,PIP_NAME,RG_LOCATION,network_client):
         print(f"pip_id:{pip_id}")      
     except HttpResponseError as error:
         print ({error})
-    return None
+    return pip_id
