@@ -4,6 +4,14 @@ RG_LOCATION = "eastus"
 NO_OF_VMS = 2
 VNET_NAME = (f"{RG_NAME}-VNet")
 SUBNET_NAME = (f"{VNET_NAME}-SUBNET1")
+vm_name = (f"{RG_NAME}-VM-")
+vm_size = 'Standard_D1_v2'
+image_reference = {
+    'publisher': 'Canonical',
+    'offer': 'UbuntuServer',
+    'sku': '18.04-LTS',
+    'version': 'latest'
+}
 print ("importing Required modules")
 #importing required modules
 import os
@@ -41,16 +49,9 @@ def main():
     vnet_creation(RG_NAME,VNET_NAME,network_client,RG_LOCATION)
     subnet_creation(RG_NAME,VNET_NAME,SUBNET_NAME,network_client)
     for i in range(NO_OF_VMS):
-        VM_NAME = (f"{RG_NAME}-VM-{str(i+1)}")
-        PIP_NAME = (f"{VM_NAME}-PIP")
-        NIC_NAME = (f"{VM_NAME}-NIC")
-        vm_size = 'Standard_D1_v2'
-        image_reference = {
-            'publisher': 'Canonical',
-            'offer': 'UbuntuServer',
-            'sku': '18.04-LTS',
-            'version': 'latest'
-        }
+        VM_NAME = (vm_name + str(i+1))
+        PIP_NAME = (vm_name + "PIP-" + str(i+1))
+        NIC_NAME = (vm_name + "NIC-" + str(i+1))
         pip_id = pip_creation(RG_NAME,PIP_NAME,RG_LOCATION,network_client)
         nic_id = nic_creation(RG_NAME,NIC_NAME,network_client,RG_LOCATION,subscription_id,VNET_NAME,SUBNET_NAME,pip_id)
         vm_creation(RG_NAME,VM_NAME,RG_LOCATION,vm_size,image_reference,nic_id,compute_client)
