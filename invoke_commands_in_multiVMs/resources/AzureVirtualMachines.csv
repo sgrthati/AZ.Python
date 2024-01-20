@@ -1,0 +1,3 @@
+﻿NAME,TYPE,SUBSCRIPTION,RESOURCE GROUP,LOCATION,STATUS,OPERATING SYSTEM,SIZE,
+"SRI-VM-1","Virtual machine","SriSri","sri","East US","Running","Linux","Standard_D1_v2"
+"SRI-VM-2","Virtual machine","SriSri","sri","East US","Running","Linux","Standard_D1_v2"
